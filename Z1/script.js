@@ -125,7 +125,7 @@ function validatePassword(password) {
             const small = document.createElement("small");
             small.id = "password-input-message";
             small.className = "invalid";
-            small.innerText = "\n\"Hasło\" powinno zawierać co najmniej 8 znaków, co najmniej 1 cyfrę, co najmniej 1 wielka literę i co najmniej 1 małą literę" ;
+            small.innerText = "\n\"Hasło\" powinno zawierać co najmniej 8 znaków, co najmniej 1 cyfrę, co najmniej 1 wielka literę i co najmniej 1 małą literę";
 
             input.parentElement.appendChild(small);
         }
@@ -135,29 +135,31 @@ function validatePassword(password) {
 
 }
 
-function validateRepeatedPassword(password, password2) {
-    const valid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(password2);
+function validateRepeatedPassword(password, repeatedPassword) {
 
-    const input2 = document.querySelector("input[name='password2']");
+    const input = document.querySelector("input[name='password2']");
 
-    if (valid === password) {
-        input2.className = "";
+    if (repeatedPassword === password && repeatedPassword) {
+        input.className = "";
         const nameMessage = document.getElementById("password2-input-message");
         if (nameMessage) {
             nameMessage.parentElement.removeChild(nameMessage);
         }
+
+        return repeatedPassword;
+
     } else {
-        input2.className = "invalid";
+        input.className = "invalid";
 
         if (!document.getElementById("password2-input-message")) {
             const small = document.createElement("small");
             small.id = "password2-input-message";
             small.className = "invalid";
-            small.innerText = "\nPole \"Powtórz hasło\" powinno mieć taką samą wartość jak pole \"Hasło\"" ;
+            small.innerText = "\nPole \"Powtórz hasło\" powinno mieć taką samą wartość jak pole \"Hasło\"";
 
-            input2.parentElement.appendChild(small);
+            input.parentElement.appendChild(small);
         }
     }
 
-    return valid;
+
 }
